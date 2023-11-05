@@ -1,0 +1,16 @@
+-std=c17
+-pedantic
+-Wall
+-Wextra
+-Wformat-security
+-Wduplicated-cond
+-Wfloat-equal
+-Wshadow
+-Wconversion
+-Wjump-misses-init
+-Wlogical-not-parentheses
+-Wnull-dereference
+-Wvla
+-Werror
+-g
+-O1
