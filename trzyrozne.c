@@ -9,9 +9,8 @@ int main(){
     scanf("%d", n);
 
     int** motels = malloc(n * sizeof(int*));
-    for(int i = 0; i < n; i++){
+    for(int i = 0; i < n; i++)
         motels[i] = malloc(2 * sizeof(int));
-    }
     int* corp = malloc(n * sizeof(int));
     memset(corp, 0, n * sizeof(int));
     int dist_corp = 0;
