@@ -1,4 +1,4 @@
-// rozwiązanie brute w O(n^2)
+// rozwiązanie w O(n)
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -28,32 +28,38 @@ int main() {
     // dla każdej pary moteli a,b różnych sieci w odległości mniejszej 
     // od aktualne_min, szukamy motelu c, w odległości od b mniejszej
     // od aktualne_min, wtedy aktualne_min to max z tych odległości.
-    for(int a = 0; a < n; a++){
-        for(int b = a+1; b < n; b++){
+    for(int a = 0; a < n-2; a++){
 
-            const int odlAB = motele[b].odl - motele[a].odl;
+        if(motele[a].siec == motele[a+1].siec)
+            continue;
 
-            if(odlAB >= min)
+        for(int x = a+1; x < n; x++){
+
+            if(motele[a].siec == motele[x].siec){
+                a = x-1;
                 break;
+            }
 
-            if(motele[a].siec == motele[b].siec)
-                continue;
+            if(motele[x].siec != motele[a+1].siec){
+                for(int i = a+1; i < x; i++){
 
-            for(int c = b+1; c < n; c++){
+                    if(motele[i].odl - motele[a].odl >= min)
+                        break;
+                    
+                    if(motele[x].odl - motele[i].odl >= min)
+                        continue;
 
-                const int odlBC = motele[c].odl - motele[b].odl;
-
-                if(odlBC >= min)
+                    min = MAX(motele[i].odl - motele[a].odl, motele[x].odl - motele[i].odl);
+                    a = x-1;
                     break;
-
-                if(motele[c].siec != motele[b].siec && motele[c].siec != motele[a].siec)
-                    min = MAX(odlAB, odlBC);
+                }
             }
         }
     }
 
-    // jeśli są tylko dwie/jedna sieci to nie zmieni się to INT_MAX więc wtedy wyrzucamy "0 0"
+    // jeśli są tylko dwie/jedna sieci to nie zmieni się to min = INT_MAX więc wtedy wyrzucamy "0 0"
     if(min == INT_MAX){
+        free(motele);
         printf("0 0");
         return 0;
     }
