@@ -36,7 +36,7 @@ int main() {
         for(int x = a+1; x < n; x++){
 
             if(motele[a].siec == motele[x].siec){
-                a = x-1;
+                a = x-2;
                 break;
             }
 
@@ -50,9 +50,9 @@ int main() {
                         continue;
 
                     min = MAX(motele[i].odl - motele[a].odl, motele[x].odl - motele[i].odl);
-                    a = x-1;
-                    break;
+                    a = x-2;
                 }
+                break;
             }
         }
     }
