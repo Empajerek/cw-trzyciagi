@@ -19,17 +19,17 @@ int main() {
 
     // Liczymy min:
     // Będziemy iterować po hotelu a. Dla tego hotelu szukamy najdłuższego
-    // podciągu kolejny tych samych moteli, po znalezieniu ich iterujemy po
-    // nich i szukamy minimum. Na końcu przerzycamy a na przedostatni motel
+    // podciągu kolejnych tych samych moteli, po znalezieniu ich iterujemy po
+    // nich i szukamy minimum. Na końcu przerzucamy a na przedostatni motel
     // w podciągu.
     int min = INT_MAX;
 
-    for(int a = 0; a < n-2; a++){
+    for(int a = 0; a < n - 2; a++){
         // jeżeli dwa pod rząd a są te same możemy ten pierwszy pominąć
-        if(motele[a].siec == motele[a+1].siec)
+        if(motele[a].siec == motele[a + 1].siec)
             continue;
 
-        for(int x = a+1; x < n; x++){
+        for(int x = a + 1; x < n; x++){
             // jeżeli trafimy na motel tej samej sieci co nasz a, oznacza to
             // że nie ma żadnej sensownej trójki więc możemy pominąć wartości
             if(motele[a].siec == motele[x].siec){
@@ -37,8 +37,8 @@ int main() {
                 break;
             }
 
-            if(motele[x].siec != motele[a+1].siec){
-                for(int i = a+1; i < x; i++){
+            if(motele[x].siec != motele[a + 1].siec){
+                for(int i = a + 1; i < x; i++){
                     // te wartości się zwiększają, więc możemy break'ować
                     if(motele[i].odl - motele[a].odl >= min)
                         break;
@@ -78,11 +78,11 @@ int main() {
     // Liczymy max:
     // początkowo wyznaczmy trzy_pierwsze i trz_ostatnie, czyli tablice z
     // trzema pierwszymi różnymi elementami i trzema ostatnimi różnymi
-    // elementami. One pozwala nam dla każdego elementu sprawdzić dla każdego
-    // środkowego elementu dwa skrajne różne, czyli zmaksymalizuje odlgłości.
+    // elementami. One pozwalają nam dla każdego elementu sprawdzić dla każdego
+    // środkowego elementu dwa skrajne różne, czyli zmaksymalizuje odległości.
     int max = 0;
     int trzy_pierwsze[3] = {0, 0, 0};
-    int trzy_ostatnie[3] = {n-1, n-1, n-1};
+    int trzy_ostatnie[3] = {n - 1, n - 1, n - 1};
     int i = 1;
 
     for(int j = 0; j < n; j++){
@@ -96,7 +96,7 @@ int main() {
     }
     i = 1;
 
-    for(int j = n-1; j > 0; j--){
+    for(int j = n - 1; j > 0; j--){
         if(motele[j].siec != motele[trzy_ostatnie[0]].siec && 
            motele[j].siec != motele[trzy_ostatnie[1]].siec && 
            motele[j].siec != motele[trzy_ostatnie[2]].siec){
@@ -106,7 +106,7 @@ int main() {
         }
     }
     // iterujemy po środkowych elementach
-    for(int b = 1; b < n-1; b++){
+    for(int b = 1; b < n - 1; b++){
         for(int a = 0; a < 3; a++){
             // wartości się zmniejszają możemy break'ować
             if(motele[b].odl - motele[trzy_pierwsze[a]].odl <= max) break;
